@@ -10,17 +10,12 @@ public:
                 visited[s[i]]=true;
             else{
                     result=max(result,i-j);
-                    
-                while(j<i)
+                while(s[j]!=s[i])
                 {
-                    if(s[j]!=s[i])
-                        visited[s[j]]=false;
-                    else{
-                        j++;
-                        break;
-                    }
+                    visited[s[j]]=false;
                     j++;
                 }
+                j++;
             }
             i++;
         }

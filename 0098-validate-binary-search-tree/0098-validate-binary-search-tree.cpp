@@ -12,18 +12,19 @@
 class Solution {
 public:
     
-    bool valid(TreeNode *t,TreeNode *&prev)
+   bool helper(TreeNode* root,TreeNode* &prev)
     {
-        if(t==nullptr)return true;
-        if(!valid(t->left,prev))return false;
-        if(prev != nullptr && prev->val >= t->val)
+        if(root==nullptr)return true;
+        if(!helper(root->left,prev))
             return false;
-        prev=t;
-        return valid(t->right,prev);
+        if(prev!= nullptr and prev->val>=root->val)
+            return false;
+        prev=root;
+        return helper(root->right,prev);
     }
     
     bool isValidBST(TreeNode* root) {
         TreeNode *prev=nullptr;
-        return valid(root,prev);
+        return helper(root,prev);
     }
 };

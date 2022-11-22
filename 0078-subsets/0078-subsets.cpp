@@ -1,22 +1,23 @@
 class Solution {
 public:
     
-    void subset_sum(vector<int> &ar,int i,vector<int> &v,vector<vector<int>> &ans){
-    if(i==ar.size()){
-        ans.push_back(v);
-        return;
+    void helper(vector<vector<int>>&res,vector<int>&temp,vector<int>nums,int index){
+        if(index>=nums.size())
+            return;
+        temp.push_back(nums[index]);
+        res.push_back(temp);
+        helper(res,temp,nums,index+1);
+        temp.pop_back();
+        helper(res,temp,nums,index+1);
     }
-    v.push_back(ar[i]);
-    subset_sum(ar,i+1,v,ans);
-    v.pop_back();
-    subset_sum(ar,i+1,v,ans);
-}
     
     vector<vector<int>> subsets(vector<int>& nums) {
-        vector<vector<int>> ans;
-        int i=0;
-        vector<int>v;
-        subset_sum(nums,i,v,ans);
-        return ans;
+        vector<vector<int>>res;
+        if(nums.size()==0)
+            return res;
+        res.push_back({});
+        vector<int>temp;
+        helper(res,temp,nums,0);
+        return res;
     }
 };
